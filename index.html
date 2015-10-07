@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html><head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="public/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="public/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="public/js/bootstrap.min.js"></script>
+<script src="public/js/ajax.js"></script>
+<link rel="stylesheet" type="text/css" href="public/css/jquery.datetimepicker.css"/>
+<style type="text/css">
+
+.custom-date-style {
+	background-color: red !important;
+}
+
+.input{	
+}
+.input-wide{
+	width: 500px;
+}
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-3 "><input type="text" id="datetimepicker_dark"/>Calendar+Clock</div>
+        <div class="col-md-3 col-md-offset-1" id="weather">Weather+Temperatures</div>
+        <div class="col-md-3 col-md-offset-1">Other sensors</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">Media</div>
+        <div class="col-md-3 col-md-offset-1 ">Different accessories</div>
+        <div class="col-md-3 col-md-offset-1 ">Command plane</div>
+    </div>
+    </div>
+<script src="public/js/jquery.js"></script>
+<script src="public/js/jquery.datetimepicker.full.min.js"></script>
+<script>
+$.datetimepicker.setLocale('ru');
+
+$('#datetimepicker_dark').datetimepicker({  format:'unixtime', inline:true,dayOfWeekStart : 1, timepicker:false,})
+
+
+</script>
+
+</body>
+</html>
