@@ -21,21 +21,148 @@
 .input-wide{
 	width: 500px;
 }
+/*--- Dash Unit / Used in Dashboard page ---*/
+.dash-unit {
+    margin-bottom: 30px;
+    padding:20px 20px;
+    border: 1px solid #e0e0e0;
+    background-color: #ededed;
+    color:black;
+    height:290px;
+}
 
+.dash-unit:hover {
+    background-color: #f0f0f0;
+    -moz-box-shadow:    3px 3px 2px 0px #151515;
+    -webkit-box-shadow: 3px 3px 2px 0px #151515;
+    box-shadow:         3px 3px 2px 0px #151515;
+
+}
+
+.dash-unit dtitle {
+    font-size:11px;
+    text-transform:uppercase;
+    color:#ffffff;
+    margin:8px;
+    padding:0px;
+    height:inherit
+}
+
+.dash-unit hr {
+    border: 0;
+    border-top: 1px solid #151515;
+    border-top-style: dashed;
+    margin-top:3px;
+}
+
+.dash-unit h1 {
+    font-family: 'Raleway', sans-serif;
+    font-weight:300;
+    font-size: 20px;
+    line-height: 2px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    padding-top:10px;
+    padding-left:5px;
+    margin-top:2px;
+    text-align:center;
+}
+
+.dash-unit h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 26px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    padding-top:10px;
+    padding-left:5px;
+    margin-top:2px;
+    text-align:center;
+}
+
+
+.dash-unit h3 {
+    font-weight:300;
+    font-size: 15px;
+    line-height: 2px;
+    letter-spacing: 0px;
+    color: #b2c831;
+    padding-top:10px;
+    padding-left:5px;
+    margin-top:2px;
+    text-align:center;
+}
+
+
+.dash-unit p {
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 16px;
+    color: inherit;
+    margin: 0 0 10px;
+    padding:5px;
+}
+
+.dash-unit h4 {
+    padding-left:5px;
+    margin-top:2px;
+    font-size: 13px;
+    font-weight:lighter;
+    line-height: 1;
+    letter-spacing: 0px;
+    color: #fff;
+}
+
+.dash-unit bold{
+    font-family: 'Open Sans', sans-serif;
+    font-size:26px;
+    font-weight:bold;
+    color:#fff;
+    vertical-align:middle;
+}
 </style>
 
 </head>
 <body>
     <div class="container">
     <div class="row">
-        <div class="col-md-3 "><input type="text" id="datetimepicker_dark"/>Calendar+Clock</div>
-        <div class="col-md-3 col-md-offset-1" id="weather">Weather+Temperatures</div>
-        <div class="col-md-3 col-md-offset-1">Other sensors</div>
+        <div class="col-md-4">
+            <div class="dash-unit">
+                <input type="text" id="datetimepicker_dark"/>Calendar+Clock
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div id="weather" class="dash-unit">Weather+Temperatures
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="dash-unit">
+                Other sensors
+            </div>
+        </div>
+
     </div>
     <div class="row">
-        <div class="col-md-3">Media</div>
-        <div class="col-md-3 col-md-offset-1 ">Different accessories</div>
-        <div class="col-md-3 col-md-offset-1 ">Command plane</div>
+        <div class="col-md-4">
+            <div class="dash-unit">
+                Media
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="dash-unit">
+                Different accessories
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="dash-unit">
+                Command plane
+            </div>
+        </div>
     </div>
     </div>
 <script src="public/js/jquery.js"></script>
