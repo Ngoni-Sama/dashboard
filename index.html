@@ -5,8 +5,9 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="public/css/bootstrap-theme.min.css">
-
+<link rel="stylesheet" href="public/css/bootstrap-switch.min.css">
 <!-- Latest compiled and minified JavaScript -->
+<script src="public/js/jquery.js"></script>
 <script src="public/js/bootstrap.min.js"></script>
 <script src="public/js/ajax.js"></script>
 <link rel="stylesheet" type="text/css" href="public/css/jquery.datetimepicker.css"/>
@@ -129,7 +130,18 @@
     <div class="row">
         <div class="col-md-4">
             <div class="dash-unit">
-                <input type="text" id="datetimepicker_dark"/>Calendar+Clock
+                <div class="row">
+                    <div class="col-md-6">
+                        Date
+                    </div>
+                    <div class="col-md-6">
+                        <digiclock style="font-size: 24px">00:00:00</digiclock></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="text-align: center">
+                        <input type="text" id="datetimepicker_dark"/>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -164,19 +176,226 @@
 
         <div class="col-md-4">
             <div class="dash-unit">
-                Different accessories
+                <!-- Button trigger modal -->
+                <a data-toggle="modal" href="#myModal_rec">
+                    Рецепты
+                </a>
+                <a data-toggle="modal" href="#myModal_createnote">
+                    Сохранить заметку
+                </a>
+                <a data-toggle="modal" href="#myModal_notes" onclick="AjaxRequestNotes()">
+                    Заметки
+                </a>
+                <a data-toggle="modal" href="#myModal_countdown">
+                    Таймер
+                </a>
+
+                <!-- Modal -->
+                <div class="modal fade" id="myModal_rec" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div>
+                                    <object type="text/html" data="http://gotovim.ru/recepts/" height="500px"
+                                            style="width:100%;overflow:hidden;border:0px">
+                                    </object>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="myModal_createnote" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="input-group">
+                                    <form action="http://127.0.0.2/index.php?request=save_comment" method="POST">
+                                        <label for="note_text" class="control-label">Заметка</label>
+                                        <textarea name="note" class="form-control" rows="8" id="note_text"></textarea>
+                                        <input type="submit" value="Сохранить!" class="form-control">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="myModal_notes" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div id="notes">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="myModal_countdown" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <digiclock>00:00:00</digiclock>
+                                <div class="form-inline">
+                                    <select name="hours" class="form-control">
+                                        <option value="00">00</option><option value="01">01</option>
+                                        <option value="02">02</option><option value="03">03</option>
+                                        <option value="04">04</option><option value="05">05</option>
+                                        <option value="06">06</option><option value="07">07</option>
+                                        <option value="08">08</option><option value="09">09</option>
+                                        <option value="10">10</option><option value="11">11</option>
+                                        <option value="12">12</option><option value="13">13</option>
+                                        <option value="14">14</option><option value="15">15</option>
+                                        <option value="16">16</option><option value="17">17</option>
+                                        <option value="18">18</option><option value="19">19</option>
+                                        <option value="20">20</option><option value="21">21</option>
+                                        <option value="22">22</option><option value="23">23</option>
+                                    </select>
+                                    <select name="minutes" class="form-control">
+                                        <option value="00">00</option><option value="01">01</option>
+                                        <option value="02">02</option><option value="03">03</option>
+                                        <option value="04">04</option><option value="05">05</option>
+                                        <option value="06">06</option><option value="07">07</option>
+                                        <option value="08">08</option><option value="09">09</option>
+                                        <option value="10">10</option><option value="11">11</option>
+                                        <option value="12">12</option><option value="13">13</option>
+                                        <option value="14">14</option><option value="15">15</option>
+                                        <option value="16">16</option><option value="17">17</option>
+                                        <option value="18">18</option><option value="19">19</option>
+                                        <option value="20">20</option><option value="21">21</option>
+                                        <option value="22">22</option><option value="23">23</option>
+                                        <option value="24">24</option><option value="25">25</option>
+                                        <option value="26">26</option><option value="27">27</option>
+                                        <option value="28">28</option><option value="29">29</option>
+                                        <option value="30">30</option><option value="31">31</option>
+                                        <option value="32">32</option><option value="33">33</option>
+                                        <option value="34">34</option><option value="35">35</option>
+                                        <option value="36">36</option><option value="37">37</option>
+                                        <option value="38">38</option><option value="39">39</option>
+                                        <option value="40">40</option><option value="41">41</option>
+                                        <option value="42">42</option><option value="43">43</option>
+                                        <option value="44">44</option><option value="45">45</option>
+                                        <option value="46">46</option><option value="47">47</option>
+                                        <option value="48">48</option><option value="49">49</option>
+                                        <option value="50">50</option><option value="51">51</option>
+                                        <option value="52">52</option><option value="53">53</option>
+                                        <option value="54">54</option><option value="55">55</option>
+                                        <option value="56">56</option><option value="57">57</option>
+                                        <option value="58">58</option><option value="59">59</option>
+                                    </select>
+                                    <select name="seconds" class="form-control">
+                                        <option value="00">00</option><option value="01">01</option>
+                                        <option value="02">02</option><option value="03">03</option>
+                                        <option value="04">04</option><option value="05">05</option>
+                                        <option value="06">06</option><option value="07">07</option>
+                                        <option value="08">08</option><option value="09">09</option>
+                                        <option value="10">10</option><option value="11">11</option>
+                                        <option value="12">12</option><option value="13">13</option>
+                                        <option value="14">14</option><option value="15">15</option>
+                                        <option value="16">16</option><option value="17">17</option>
+                                        <option value="18">18</option><option value="19">19</option>
+                                        <option value="20">20</option><option value="21">21</option>
+                                        <option value="22">22</option><option value="23">23</option>
+                                        <option value="24">24</option><option value="25">25</option>
+                                        <option value="26">26</option><option value="27">27</option>
+                                        <option value="28">28</option><option value="29">29</option>
+                                        <option value="30">30</option><option value="31">31</option>
+                                        <option value="32">32</option><option value="33">33</option>
+                                        <option value="34">34</option><option value="35">35</option>
+                                        <option value="36">36</option><option value="37">37</option>
+                                        <option value="38">38</option><option value="39">39</option>
+                                        <option value="40">40</option><option value="41">41</option>
+                                        <option value="42">42</option><option value="43">43</option>
+                                        <option value="44">44</option><option value="45">45</option>
+                                        <option value="46">46</option><option value="47">47</option>
+                                        <option value="48">48</option><option value="49">49</option>
+                                        <option value="50">50</option><option value="51">51</option>
+                                        <option value="52">52</option><option value="53">53</option>
+                                        <option value="54">54</option><option value="55">55</option>
+                                        <option value="56">56</option><option value="57">57</option>
+                                        <option value="58">58</option><option value="59">59</option>
+                                    </select>
+                                    <input value="Start!" class="form-control" onclick="countdown(); start_count();" type="button">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
+
         <div class="col-md-4">
             <div class="dash-unit">
-                Command plane
+                <div class="row">
+                    <div class="col-md-4" style="line-height: 20px; padding: 6px 20px">
+                        Led 1:
+                    </div>
+                    <div class="col-md-8">
+                        <input id="switch-state1" style="" checked type="checkbox">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="line-height: 20px; padding: 6px 20px">
+                        Led 2:
+                    </div>
+                    <div class="col-md-8">
+                        <input id="switch-state2" checked type="checkbox">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="line-height: 20px; padding: 6px 20px">
+                        Perdeler:
+                    </div>
+                    <div class="col-md-8">
+                        <input id="switch-state3" checked type="checkbox">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     </div>
-<script src="public/js/jquery.js"></script>
 <script src="public/js/jquery.datetimepicker.full.min.js"></script>
+<script src="public/js/bootstrap-switch.min.js"></script>
+<script src="public/js/main.js"></script>
+<script src="public/js/highlight.js"></script>
+<script>
+    function datetime() {
+        d = new Date();
+        document.getElementsByTagName("digiclock")[0].innerHTML=d.toLocaleTimeString();
+        setTimeout('datetime()',1000);
+    }
+    window.onload=datetime();
+
+    var timeout_0;
+    function countdown() {
+        hours=parseInt(document.getElementsByTagName("select")[0].value,10);
+        minutes=parseInt(document.getElementsByTagName("select")[1].value,10);
+        seconds=parseInt(document.getElementsByTagName("select")[2].value,10);
+        d_0=new Date();
+        d_0.setHours(d_0.getHours()+hours);
+        d_0.setMinutes(d_0.getMinutes()+minutes);
+        d_0.setSeconds(d_0.getSeconds()+seconds);
+        if(timeout_0>1);
+        clearTimeout(timeout_0);
+    }
+    function start_count() {
+        d=new Date();
+        b=new Date();
+        b.setTime(d_0.getTime()-d.getTime()-21600000);
+        hh=	b.getHours()<10 ? "0" + b.getHours() : b.getHours();
+        mm= b.getMinutes()<10 ? "0" + b.getMinutes() : b.getMinutes();
+        ss= b.getSeconds()<10 ? "0" + b.getSeconds() : b.getSeconds();
+        document.getElementsByTagName("digiclock")[1].innerHTML=hh+":"+mm+":"+ss;
+        timeout_0=setTimeout('start_count()',1000);
+        if(b.getHours()<1 && b.getMinutes()<1 && b.getSeconds()<1)
+            clearTimeout(timeout_0);
+    }
+
+</script>
 <script>
 $.datetimepicker.setLocale('ru');
 

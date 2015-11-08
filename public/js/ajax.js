@@ -98,7 +98,15 @@ function AjaxSendard() {
 http.send();
 }
 
-
+function AjaxRequestNotes() {
+	var http=createCORSRequest("GET",server+"/index.php?request=comments");
+	http.onload = function() {
+		if (http.readyState==4 && http.status == 200) {
+			notes.innerHTML=http.response;
+		}
+	}
+	http.send();
+}
 
 function AjaxWeatherReq() {
 	var http=createCORSRequest("GET",server+"/index.php?request=weather");

@@ -82,17 +82,73 @@ echo "Утро: ".$xml->day[1]->day_part[0]->temperature_from." - ".$xml->day[1]
 echo "День: ".$xml->day[1]->day_part[1]->temperature_from." - ".$xml->day[1]->day_part[0]->temperature_to." &degC ";//.$xml->day[1]->day_part[1]->weather_type."<br>";
 echo "Вечер: ".$xml->day[1]->day_part[2]->temperature_from." - ".$xml->day[1]->day_part[0]->temperature_to." &degC ";//.$xml->day[1]->day_part[2]->weather_type."<br>";
 echo "Ночь: ".$xml->day[1]->day_part[3]->temperature_from." - ".$xml->day[1]->day_part[0]->temperature_to." &degC ";//.$xml->day[1]->day_part[3]->weather_type."<br></div>";
+echo '<div style="width:48px; height:48px; background-image:url(public/images/weather/';
+	switch($xml->fact->image["type"]){
+		case "2":
+			echo "rain.svg";
+			break;
+		default:
+			echo "";
+	}
+echo ')"></div>';
+}
+
+function Save_comment() {
+	$sqlite=new SQLite3('wsn_db.sqlite');
+	$str='Insert into Notes ("note","date") VALUES ("'.$_POST["note"].'",datetime("now"))';
+	$sqlite->query($str);
+	$sqlite->close();
+
+	header("Location: http://127.0.0.2/index.html");
+	die();
 
 }
+
+function Request_comments() {
+	$sqlite=new SQLite3('wsn_db.sqlite');
+	$values=$sqlite->query("Select * from Notes Order by Date Desc");
+	$i=0;
+	while($row=$values->fetchArray(SQLITE3_ASSOC)) {
+		echo "<form action=http://127.0.0.2/index.php?request=delete_comment method=POST>";
+		$i++;
+		echo "Comment ".$i." <div id=date".$i.">".$row["date"]."</div><br>";
+		echo $row["note"] ."<br>";
+		echo '<input name=date type=hidden value="'.$row["date"].'">';
+		echo '<input type="submit" value="Удалить">';
+		echo "</form>";
+	}
+
+	$sqlite->close();
+}
+
+function Delete_comment() {
+	$sqlite=new SQLite3('wsn_db.sqlite');
+	$str='Delete From Notes where date="'.$_POST["date"].'"';
+	$sqlite->query($str);
+	$sqlite->close();
+
+	header("Location: http://127.0.0.2/index.html");
+	die();
+}
+
 switch($_GET["request"]) {
 	case "weather":
-	Request_weather();
-	break;
+		Request_weather();
+		break;
 	case "sensors":
-	Request_data();
-	break;
+		Request_data();
+		break;
+	case "save_comment":
+		Save_comment();
+		break;
+	case "comments":
+		Request_comments();
+		break;
+	case "delete_comment":
+		Delete_comment();
+		break;
 	default:
-	break;
+		break;
 }
 	
 	
