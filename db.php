@@ -11,7 +11,6 @@ $values=$sqlite->query("Select * from Notes");
 $row=$values->fetchArray(SQLITE3_ASSOC);
 //var_dump($row);
 $sqlite->close();
-
 header("Location: http://127.0.0.2/index.html");
 die();
 ?>
